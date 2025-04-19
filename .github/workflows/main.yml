@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build
+        run: |
+          echo "Building the application..."
+          # Build commands here
+          
+      - name: Test
+        run: |
+          echo "Running tests..."
+          # Test commands here
+          
+      - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "Deploying to production..."
+          echo "Pull Request Title: ${{github.event.pull_request.title}}"
+          # Deployment commands here
+          
+      - name: Security Scan
+        run: |
+          echo "Running security scan..."
+          # Security scan commands here
+          
+      - name: Performance Test
+        run: |
+          echo "Running performance tests..."
+          # Performance test commands here 
